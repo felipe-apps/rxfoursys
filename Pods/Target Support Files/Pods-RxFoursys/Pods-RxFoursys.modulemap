@@ -1,0 +1,6 @@
+framework module Pods_RxFoursys {
+  umbrella header "Pods-RxFoursys-umbrella.h"
+
+  export *
+  module * { export * }
+}
