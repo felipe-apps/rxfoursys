@@ -37,10 +37,9 @@ class TaskService {
                 }
 
                 if httpResponse.statusCode == 201 {
-                    // Após o sucesso no servidor, salve localmente
+                    // Saving locally after successfully sent to API
                     TaskService.saveTasksToUserDefaults(tasks)
 
-                    // Após salvar localmente, faça o fetch das tasks
                     let savedTasks = TaskService.fetchSavedTasks()
                     print("Tasks salvas localmente após o POST:", savedTasks)
 
@@ -56,6 +55,7 @@ class TaskService {
     }
 
     static func saveTasksToUserDefaults(_ newTasks: [Task]) {
+        // Fetches savedTasks when saving to UserDefaults
             var savedTasks = fetchSavedTasksSync()
 
             savedTasks.append(contentsOf: newTasks)

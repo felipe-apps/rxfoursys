@@ -16,6 +16,7 @@ class TaskListViewController: UIViewController {
     private let showSavedTasksButton = UIButton(type: .system)
     private let viewModel = TaskListViewModel()
     private let disposeBag = DisposeBag()
+    var coordinator: AppCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +39,12 @@ class TaskListViewController: UIViewController {
         configureButton(saveButton, title: "Salvar", color: .systemBlue)
         configureButton(showSavedTasksButton, title: "Mostrar Tarefas Salvas", color: .systemBlue)
         
-        // StackView para os botões
         let buttonStack = UIStackView(arrangedSubviews: [addButton, saveButton, showSavedTasksButton])
         buttonStack.axis = .vertical
         buttonStack.spacing = 10
         buttonStack.distribution = .fillEqually
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
-        buttonStack.heightAnchor.constraint(equalToConstant: 132).isActive = true // Ajustado para 3 botões
+        buttonStack.heightAnchor.constraint(equalToConstant: 132).isActive = true
         
         let stackView = UIStackView(arrangedSubviews: [tableView, buttonStack])
         stackView.axis = .vertical
@@ -156,9 +156,7 @@ class TaskListViewController: UIViewController {
     
     // MARK: - Navigation
     private func navigateToSavedTasks() {
-        let savedTasksViewController = SavedTasksViewController()
-        let navigationController = UINavigationController(rootViewController: savedTasksViewController)
-        self.present(navigationController, animated: true, completion: nil)
+        coordinator?.navigateToSavedTasks()
     }
 }
 

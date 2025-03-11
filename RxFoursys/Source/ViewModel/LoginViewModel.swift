@@ -21,10 +21,11 @@ class LoginViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
-        // O botão de login só fica habilitado se os campos não estiverem vazios
+        // The login button is only enabled if the fields are filled
         isLoginEnabled = Observable.combineLatest(email, password) { !$0.isEmpty && !$1.isEmpty }
     }
 
+    // Authenticating in Firebase
     func loginUser() {
         let email = email.value
         let pass = password.value
@@ -39,7 +40,7 @@ class LoginViewModel {
         }
     }
 
-    // Função para mapear os erros do Firebase
+    // Function that maps Firebase errors
     private func mapAuthError(_ error: NSError) -> String {
         guard let errorCode = AuthErrorCode.Code(rawValue: error.code) else {
             return "Ocorreu um erro desconhecido."

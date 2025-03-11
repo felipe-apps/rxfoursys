@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
         bindViewModel()
     }
     
+    // MARK: - Setting up UI elements
     private func setupUI() {
         view.backgroundColor = UIColor.systemGray6
         
@@ -71,6 +72,7 @@ class LoginViewController: UIViewController {
         textField.leftViewMode = .always
     }
     
+    // MARK: - Binding ViewModel to View
     private func bindViewModel() {
         emailTextField.rx.text.orEmpty
             .bind(to: viewModel.email)
@@ -108,6 +110,7 @@ class LoginViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    // MARK: - Alerts
     private func showErrorAlert(message: String) {
         let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -115,6 +118,7 @@ class LoginViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension UIView {
     func setHeight(_ height: CGFloat) {
         self.translatesAutoresizingMaskIntoConstraints = false

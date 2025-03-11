@@ -29,6 +29,18 @@ class AppCoordinator {
 
     private func showTaskList() {
         let taskListVC = TaskListViewController()
+        taskListVC.coordinator = self
         navigationController.setViewControllers([taskListVC], animated: true)
+    }
+    
+    func navigateToSavedTasks() {
+        let savedTasksViewController = SavedTasksViewController()
+        
+        // Translating Back button to portuguese
+        if let topViewController = navigationController.topViewController {
+            topViewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Voltar", style: .plain, target: nil, action: nil)
+        }
+        
+        navigationController.pushViewController(savedTasksViewController, animated: true)
     }
 }

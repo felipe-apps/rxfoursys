@@ -21,6 +21,7 @@ class SavedTasksViewController: UIViewController {
         setupUI()
         bindViewModel()
         viewModel.fetchSavedTasks()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Voltar", style: .plain, target: nil, action: nil)
     }
     
     // MARK: - Setting up UI elements
@@ -88,7 +89,7 @@ class SavedTasksViewController: UIViewController {
             }
             .bind(to: tableView.rx.items(cellIdentifier: "TaskCell")) { _, task, cell in
                 cell.textLabel?.text = task.title
-                cell.accessoryType = task.isCompleted ? .checkmark : .none
+                cell.accessoryType = .checkmark
             }
             .disposed(by: disposeBag)
         

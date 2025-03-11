@@ -30,6 +30,7 @@ class TaskListViewModel {
         tasks.accept(remainingTasks)
     }
     
+    // Function that saves completed tasks to API and Locally
     func saveCompletedTasks() -> Completable {
         let completedTasks = tasks.value.filter { $0.isCompleted }
         
@@ -38,7 +39,7 @@ class TaskListViewModel {
             return Completable.empty()
         }
         
-        return TaskService.saveCompletedTasks(completedTasks) // Passa apenas as tarefas concluídas
+        return TaskService.saveCompletedTasks(completedTasks)
             .do(
                 onError: { [weak self] error in
                     self?.saveStatus.onNext("Erro ao salvar tarefas: \(error.localizedDescription)")
